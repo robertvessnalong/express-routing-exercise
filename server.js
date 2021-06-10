@@ -1,7 +1,6 @@
 const { json } = require('body-parser');
 const express = require('express');
 const { values } = require('methods');
-const { array } = require('prop-types');
 const errorHanlder = require('./error');
 
 const app = express();
@@ -13,7 +12,6 @@ app.get('/mean', (req, res, next) => {
       throw new errorHanlder('Nums was not included in parameters', 400);
     else {
       const nums = req.query.nums.split(',');
-      console.log(nums.length);
       for (let num of nums) {
         if (/[a-zA-Z]/.test(num)) {
           throw new errorHanlder('Only enter in numbers', 400);
@@ -101,3 +99,5 @@ app.use((err, req, res, next) => {
 app.listen(3000, function () {
   console.log('App on port 3000');
 });
+
+module.exports = app;
